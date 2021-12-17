@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="text_lbl_password">Password</string>
+    <string name="text_lbl_email">Email</string>
+    <string name="text_hint_input_email">Input email</string>
+    <string name="text_hint_input_password">Input password</string>
+    <string name="text_app_name">DEMO MVVM</string>
+    <string name="text_btn_login">Login</string>
+</resources>
