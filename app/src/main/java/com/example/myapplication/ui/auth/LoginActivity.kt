@@ -2,16 +2,11 @@ package com.example.myapplication.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isVisible
 
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
-import com.example.myapplication.data.entities.User
-import com.example.myapplication.data.network.MyAPI
-import com.example.myapplication.data.repositories.UserRepository
 import com.example.myapplication.data.response.LoginResponse
 import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.utils.Coroutines
@@ -32,9 +27,7 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         val authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
         binding?.authViewModel = authViewModel
         authViewModel.authListener = this
-        binding?.authViewModel?.userLiveData?.observe(this,{
-            binding?.authViewModel?.isShowProgressBar?.set(false)
-        })
+        getUserInfo()
     }
 
     override fun onSuccess(message: LiveData<LoginResponse?>) {
@@ -58,12 +51,9 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         binding?.authViewModel?.isShowProgressBar?.set(true)
     }
 
-    private fun getUserInfo(){
-        binding?.authViewModel?.userLiveData?.observe(this,{
+    private fun getUserInfo() {
+        binding?.authViewModel?.userLiveData?.observe(this, {
             binding?.authViewModel?.isShowProgressBar?.set(false)
-            if (it!= null){
-
-            }
         })
     }
 }
