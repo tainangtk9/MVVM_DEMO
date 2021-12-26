@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
+
 object BindingAdapters{
 
     @BindingAdapter("app:hideProgressBar",requireAll = false)
