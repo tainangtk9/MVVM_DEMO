@@ -9,8 +9,8 @@ import com.example.myapplication.utils.Coroutines
 import com.example.myapplication.utils.toast
 
 class AuthViewModel : ViewModel() {
-    var email: String? = null
-    var password: String? = null
+    var email: String? = "eve.holt@reqres.in"
+    var password: String? = "cityslicka"
     var authListener: AuthListener? = null
     var isShowProgressBar = ObservableBoolean(false)
     var userLiveData = MutableLiveData<User?>()
@@ -26,11 +26,15 @@ class AuthViewModel : ViewModel() {
         authListener?.onSuccess(loginResponse)
     }
 
-     fun getUserInfo(){
-         Coroutines.main {
-             val response = UserRepository().getUserInfo()
-             userLiveData.value = response.data
-         }
-     }
+    fun getUserInfo() {
+        Coroutines.main {
+            val response = UserRepository().getUserInfo()
+            if (response.data != null){
+                userLiveData.postValue(response.data)
+            }else{
+                userLiveData.postValue(null)
+            }
+        }
+    }
 
 }

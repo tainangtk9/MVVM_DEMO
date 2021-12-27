@@ -1,10 +1,10 @@
 package com.example.myapplication.data.network
 
 import com.example.myapplication.data.request.LoginRequest
-import com.example.myapplication.data.response.BaseResponse
+import com.example.myapplication.data.response.UsersResponse
 import com.example.myapplication.data.response.LoginResponse
+import com.example.myapplication.data.response.UserInfoResponse
 import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -20,8 +20,15 @@ interface MyAPI {
     ): Call<LoginResponse>
 
 
-    @GET("users/2")
-    suspend fun getUserInfo(): BaseResponse
+    @GET("/api/users/2")
+    suspend fun getUserInfo(): UserInfoResponse
+
+
+    @GET("users")
+    suspend fun getUsers(
+        @Query("page") page: Int,
+        @Query("per_page") limit: Int
+    ): UsersResponse
 
     companion object {
         private const val BASE_URL = "https://reqres.in/api/"
