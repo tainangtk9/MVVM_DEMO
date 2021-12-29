@@ -7,6 +7,7 @@ import com.example.myapplication.data.entities.User
 import com.example.myapplication.data.repositories.UserRepository
 import com.example.myapplication.utils.Coroutines
 import com.example.myapplication.utils.toast
+import kotlin.math.log
 
 class AuthViewModel : ViewModel() {
     var email: String? = "eve.holt@reqres.in"

@@ -11,9 +11,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
-
+/**
+ * create Retrofit
+ */
 interface MyAPI {
-
+    /**
+     * create a API
+     */
     @POST("login")
     fun userLogin(
         @Body requestBody: LoginRequest
@@ -30,11 +34,16 @@ interface MyAPI {
         @Query("per_page") limit: Int
     ): UsersResponse
 
+    /**
+     * Create instance of retrofit
+     */
     companion object {
         private const val BASE_URL = "https://reqres.in/api/"
         operator fun invoke(): MyAPI {
+            // Log request and response, param, body....
             val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BODY
+            // HTTClient
             val httpClient = OkHttpClient.Builder()
             httpClient.addInterceptor(logging)
             val retrofit: Retrofit = Retrofit.Builder()

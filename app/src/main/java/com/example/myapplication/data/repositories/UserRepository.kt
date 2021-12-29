@@ -1,5 +1,6 @@
 package com.example.myapplication.data.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
@@ -20,7 +21,8 @@ class UserRepository {
 
     fun userLogin(email: String, password: String): LiveData<LoginResponse?> {
         val loginResponse = MutableLiveData<LoginResponse?>()
-        MyAPI().userLogin(LoginRequest(email, password)).enqueue(object : Callback<LoginResponse> {
+        val loginRequest = LoginRequest(email, password)
+        MyAPI().userLogin(loginRequest).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful && response.code() == 200) {
                     loginResponse.value = response.body()
