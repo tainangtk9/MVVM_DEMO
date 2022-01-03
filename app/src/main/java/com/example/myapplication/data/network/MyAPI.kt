@@ -1,9 +1,10 @@
 package com.example.myapplication.data.network
 
+import com.example.myapplication.data.entities.User
 import com.example.myapplication.data.request.LoginRequest
+import com.example.myapplication.data.response.BaseResponse
 import com.example.myapplication.data.response.UsersResponse
 import com.example.myapplication.data.response.LoginResponse
-import com.example.myapplication.data.response.UserInfoResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -25,7 +26,7 @@ interface MyAPI {
 
 
     @GET("/api/users/2")
-    suspend fun getUserInfo(): UserInfoResponse
+    suspend fun getUserInfo(): BaseResponse<User>
 
 
     @GET("users")

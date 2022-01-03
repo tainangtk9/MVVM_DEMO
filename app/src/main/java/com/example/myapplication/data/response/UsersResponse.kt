@@ -5,11 +5,7 @@ import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
-class UsersResponse {
-    @SerializedName("data")
-    @Expose
-    var data: List<User>? = null
-
+class UsersResponse : BaseResponse<List<User>?>() {
     @SerializedName("page")
     @Expose
     var page: Int? = null

@@ -1,17 +1,16 @@
 package com.example.myapplication.data.repositories
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.*
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.myapplication.data.entities.User
-import com.example.myapplication.data.request.LoginRequest
 import com.example.myapplication.data.network.MyAPI
-import com.example.myapplication.data.response.UsersResponse
+import com.example.myapplication.data.request.LoginRequest
+import com.example.myapplication.data.response.BaseResponse
 import com.example.myapplication.data.response.LoginResponse
-import com.example.myapplication.data.response.UserInfoResponse
 import com.example.myapplication.utils.DEFAULT_PAGE_SIZE
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,7 +38,7 @@ class UserRepository {
         return loginResponse
     }
 
-    suspend fun getUserInfo(): UserInfoResponse {
+    suspend fun getUserInfo(): BaseResponse<User> {
         return MyAPI().getUserInfo()
     }
 

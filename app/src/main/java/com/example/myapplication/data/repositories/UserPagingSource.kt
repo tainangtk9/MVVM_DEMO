@@ -8,10 +8,10 @@ import com.example.myapplication.utils.DEFAULT_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
 
-class UserPagingSource(val apiService: MyAPI) : PagingSource<Int, User>() {
+class UserPagingSource(private val apiService: MyAPI) : PagingSource<Int, User>() {
 
     override fun getRefreshKey(state: PagingState<Int, User>): Int? {
-        TODO("Not yet implemented")
+        return null
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
