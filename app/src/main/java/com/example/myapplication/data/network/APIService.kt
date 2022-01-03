@@ -15,7 +15,7 @@ import retrofit2.http.*
 /**
  * create Retrofit
  */
-interface MyAPI {
+interface APIService {
     /**
      * create a API
      */
@@ -40,7 +40,7 @@ interface MyAPI {
      */
     companion object {
         private const val BASE_URL = "https://reqres.in/api/"
-        operator fun invoke(): MyAPI {
+        operator fun invoke(): APIService {
             // Log request and response, param, body....
             val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BODY
@@ -52,7 +52,7 @@ interface MyAPI {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient.build())
                 .build()
-            return retrofit.create(MyAPI::class.java)
+            return retrofit.create(APIService::class.java)
         }
     }
 }

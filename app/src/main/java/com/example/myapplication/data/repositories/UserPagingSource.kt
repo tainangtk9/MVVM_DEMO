@@ -3,12 +3,12 @@ package com.example.myapplication.data.repositories
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.myapplication.data.entities.User
-import com.example.myapplication.data.network.MyAPI
+import com.example.myapplication.data.network.APIService
 import com.example.myapplication.utils.DEFAULT_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
 
-class UserPagingSource(private val apiService: MyAPI) : PagingSource<Int, User>() {
+class UserPagingSource(private val apiServiceService: APIService) : PagingSource<Int, User>() {
 
     override fun getRefreshKey(state: PagingState<Int, User>): Int? {
         return null
@@ -16,7 +16,7 @@ class UserPagingSource(private val apiService: MyAPI) : PagingSource<Int, User>(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
         val page = params.key ?: DEFAULT_PAGE_INDEX
-        val response = apiService.getUsers(page, params.loadSize)
+        val response = apiServiceService.getUsers(page, params.loadSize)
         val data: List<User> =
             if (response.data is List<User>) response.data as List<User> else arrayListOf()
         return try {

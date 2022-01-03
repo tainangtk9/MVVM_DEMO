@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.example.myapplication.data.entities.User
-import com.example.myapplication.data.network.MyAPI
+import com.example.myapplication.data.network.APIService
 import com.example.myapplication.data.request.LoginRequest
 import com.example.myapplication.data.response.BaseResponse
 import com.example.myapplication.data.response.LoginResponse
@@ -21,7 +21,7 @@ class UserRepository {
     fun userLogin(email: String, password: String): LiveData<LoginResponse?> {
         val loginResponse = MutableLiveData<LoginResponse?>()
         val loginRequest = LoginRequest(email, password)
-        MyAPI().userLogin(loginRequest).enqueue(object : Callback<LoginResponse> {
+        APIService().userLogin(loginRequest).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful && response.code() == 200) {
                     loginResponse.value = response.body()
@@ -39,13 +39,13 @@ class UserRepository {
     }
 
     suspend fun getUserInfo(): BaseResponse<User> {
-        return MyAPI().getUserInfo()
+        return APIService().getUserInfo()
     }
 
     fun getUsers(pagingConfig: PagingConfig = getDefaultPageConfig()): LiveData<PagingData<User>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { UserPagingSource(MyAPI()) }
+            pagingSourceFactory = { UserPagingSource(APIService()) }
         ).liveData
     }
 
