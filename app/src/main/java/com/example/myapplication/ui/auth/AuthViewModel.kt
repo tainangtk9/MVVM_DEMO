@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
-    var email: String? = null
-    var password: String? = null
+    var email: String? = "eve.holt@reqres.in"
+    var password: String? = "cityslicka"
     var authListener: AuthListener? = null
     var isShowProgressBar = ObservableBoolean(false)
     var userLiveData = MutableLiveData<User?>()
@@ -23,17 +23,15 @@ class AuthViewModel @Inject constructor(private val userRepository: UserReposito
         if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
             authListener?.onFailure("Invalid email and password")
             return
-         }
+        }
         authListener?.onStarted()
-//        val loginResponse = userRepository.userLogin(email!!, password!!)
-//        authListener?.onSuccess(loginResponse)
+        val loginResponse = userRepository.userLogin(email!!, password!!)
+        authListener?.onSuccess(loginResponse)
     }
 
      fun getUserInfo(){
-         Coroutines.main {
-             val response = userRepository.getUserInfo()
-             userLiveData.value = response.data
-         }
+         val response = userRepository.getUserInfo()
+         userLiveData.value = response.value
      }
 
 }

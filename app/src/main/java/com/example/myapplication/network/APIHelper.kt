@@ -2,6 +2,8 @@ package com.example.myapplication.network
 
 import com.example.myapplication.data.entities.User
 import com.example.myapplication.data.response.BaseResponse
+import com.example.myapplication.data.response.LoginResponse
+import retrofit2.Call
 
 /**
  * @author NangPT
@@ -9,10 +11,10 @@ import com.example.myapplication.data.response.BaseResponse
  */
 interface APIHelper {
 
-//    suspend fun userLogin(email: String, password: String): Call<LoginResponse>
+    fun userLogin(email: String, password: String): Call<LoginResponse>
 
-    suspend fun getUserInfo(): BaseResponse<User>
+    fun getUserInfo(): Call<BaseResponse<User>?>
 
-    suspend fun getUsers(): BaseResponse<List<User>>
+    fun getUsers(): Call<BaseResponse<List<User>>?>
 
 }

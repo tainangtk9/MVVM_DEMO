@@ -17,25 +17,10 @@ interface APIService {
         @Body requestBody: LoginRequest
     ): Call<LoginResponse>
 
-
     @GET("users/2")
-    suspend fun getUserInfo(): BaseResponse<User>
+    fun getUserInfo(): Call<BaseResponse<User>?>
 
-    @GET("api/users")
-    suspend fun getUsers(): BaseResponse<List<User>>
+    @GET("users")
+    fun getUsers(): Call<BaseResponse<List<User>>?>
 
-//    companion object {
-//        operator fun invoke(): APIService {
-//            val logging = HttpLoggingInterceptor()
-//            logging.level = HttpLoggingInterceptor.Level.BODY
-//            val httpClient = OkHttpClient.Builder()
-//            httpClient.addInterceptor(logging)
-//            val retrofit: Retrofit = Retrofit.Builder()
-//                .baseUrl(BuildConfig.BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .client(httpClient.build())
-//                .build()
-//            return retrofit.create(APIService::class.java)
-//        }
-//    }
 }

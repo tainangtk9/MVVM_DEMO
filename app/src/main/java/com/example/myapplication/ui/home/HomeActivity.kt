@@ -18,7 +18,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         homeViewModel.getUsers()
         homeViewModel.usersLiveData.observe(this, {
-            Log.e(TAG ,"Length"+it.size)
+            Log.e(TAG ,"Length"+it?.size)
         })
     }
 

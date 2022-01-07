@@ -1,15 +1,15 @@
 package com.example.myapplication.ui.auth
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.data.response.LoginResponse
 import com.example.myapplication.databinding.ActivityLoginBinding
-import com.example.myapplication.utils.Coroutines
+import com.example.myapplication.ui.home.HomeActivity
 import com.example.myapplication.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,13 +18,14 @@ import dagger.hilt.android.AndroidEntryPoint
  * "email": "eve.holt@reqres.in",
  * "password": "cityslicka"
  */
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity(), AuthListener {
     private var binding: ActivityLoginBinding? = null
+    private val authViewModel by viewModels<AuthViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =
             DataBindingUtil.setContentView(this, R.layout.activity_login)
-        val authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
         binding?.authViewModel = authViewModel
         authViewModel.authListener = this
         getUserInfo()
@@ -54,6 +55,8 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     private fun getUserInfo() {
         binding?.authViewModel?.userLiveData?.observe(this, {
             binding?.authViewModel?.isShowProgressBar?.set(false)
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         })
     }
 }

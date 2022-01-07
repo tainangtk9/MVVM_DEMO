@@ -2,6 +2,7 @@ package com.example.myapplication.di.module
 
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.network.APIHelper
+import com.example.myapplication.network.APIHelperImpl
 import com.example.myapplication.network.APIService
 import dagger.Module
 import dagger.Provides
@@ -36,6 +37,7 @@ class ApplicationModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient, baseURL: String): Retrofit {
         return Retrofit.Builder()
+            .baseUrl(baseURL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -43,12 +45,12 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun providerAPIService(retrofit: Retrofit): APIService? {
+    fun providerAPIService(retrofit: Retrofit): APIService {
         return retrofit.create(APIService::class.java)
     }
 
     @Provides
     @Singleton
-    fun providerAPIHelper(apiHelper: APIHelper):APIHelper = apiHelper
+    fun providerAPIHelper(apiHelper: APIHelperImpl):APIHelper = apiHelper
 
 }
