@@ -27,6 +27,9 @@ class AuthViewModel : ViewModel() {
         authListener?.onSuccess(loginResponse)
     }
 
+    /**
+     * get user info from server
+     */
     fun getUserInfo() {
         Coroutines.main {
             val response = UserRepository().getUserInfo()

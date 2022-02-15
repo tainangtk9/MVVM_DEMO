@@ -16,8 +16,20 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * User repository
+ *
+ * @constructor Create empty User repository
+ */
 class UserRepository {
 
+    /**
+     * User login
+     *
+     * @param email
+     * @param password
+     * @return
+     */
     fun userLogin(email: String, password: String): LiveData<LoginResponse?> {
         val loginResponse = MutableLiveData<LoginResponse?>()
         val loginRequest = LoginRequest(email, password)
@@ -38,10 +50,21 @@ class UserRepository {
         return loginResponse
     }
 
+    /**
+     * Get user info
+     *
+     * @return
+     */
     suspend fun getUserInfo(): BaseResponse<User> {
         return APIService().getUserInfo()
     }
 
+    /**
+     * Get users
+     *
+     * @param pagingConfig
+     * @return
+     */
     fun getUsers(pagingConfig: PagingConfig = getDefaultPageConfig()): LiveData<PagingData<User>> {
         return Pager(
             config = pagingConfig,

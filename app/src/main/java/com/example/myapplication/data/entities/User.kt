@@ -9,6 +9,9 @@ import com.google.gson.annotations.Expose
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * User entities
+ */
 @Entity(tableName = "user")
 data class User(
     @PrimaryKey

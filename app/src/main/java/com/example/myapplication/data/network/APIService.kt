@@ -13,11 +13,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 /**
- * create Retrofit
+ * A p i service
+ *
+ * @constructor Create empty A p i service
  */
 interface APIService {
     /**
-     * create a API
+     * User login
+     *
+     * @param requestBody
+     * @return
      */
     @POST("login")
     fun userLogin(
@@ -25,10 +30,22 @@ interface APIService {
     ): Call<LoginResponse>
 
 
+    /**
+     * Get user info
+     *
+     * @return
+     */
     @GET("/api/users/2")
     suspend fun getUserInfo(): BaseResponse<User>
 
 
+    /**
+     * Get users
+     *
+     * @param page
+     * @param limit
+     * @return
+     */
     @GET("users")
     suspend fun getUsers(
         @Query("page") page: Int,

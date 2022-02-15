@@ -13,14 +13,13 @@ import com.example.myapplication.R
 import com.example.myapplication.data.response.LoginResponse
 import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.ui.home.HomeActivity
-import com.example.myapplication.utils.Coroutines
 import com.example.myapplication.utils.toast
-import dagger.hilt.android.AndroidEntryPoint
+
 
 /**
- *  User and password login
- * "email": "eve.holt@reqres.in",
- * "password": "cityslicka"
+ * Login activity
+ *
+ * @constructor Create empty Login activity
  */
 class LoginActivity : AppCompatActivity(), AuthListener {
     private val authViewModel: AuthViewModel by viewModels()
@@ -33,6 +32,10 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         getUserInfo()
     }
 
+    /**
+     * override login response
+     *  [message] Login response
+     */
     override fun onSuccess(message: LiveData<LoginResponse?>) {
         message.observe(this, { loginResponse ->
             if (!loginResponse?.token.isNullOrBlank()) {

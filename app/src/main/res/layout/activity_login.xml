@@ -106,13 +106,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#4DB6AC"
+            android:backgroundTint="@color/green_4DB6AC"
             android:onClick="@{authViewModel::onLoginButtonClick}"
             android:text="@string/text_btn_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llLoginForm" />
 
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Using biometric login"
+            android:background="#BDB3B3"
+            android:textColor="@color/green_4DB6AC"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#4DB6AC"
+            android:drawableLeft="@drawable/ic_face"
+            android:scaleType="fitXY"
+            android:text="Login FaceID"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFinger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4DB6AC"
+            android:drawableLeft="@drawable/ic_fingerprint"
+            android:scaleType="fitXY"
+            android:text="Login FingerPrint"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFace" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

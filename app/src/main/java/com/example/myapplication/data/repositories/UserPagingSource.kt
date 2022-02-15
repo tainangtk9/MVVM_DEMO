@@ -8,12 +8,23 @@ import com.example.myapplication.utils.DEFAULT_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * User paging source
+ * @param apiServiceService Api service
+ */
 class UserPagingSource(private val apiServiceService: APIService) : PagingSource<Int, User>() {
 
     override fun getRefreshKey(state: PagingState<Int, User>): Int? {
         return null
     }
 
+    /**
+     * load data
+     * @param params LoadParam
+     * @return LoadResult list user
+     * @throws IOException io exception
+     * @throws HttpException http exception
+     */
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
         val page = params.key ?: DEFAULT_PAGE_INDEX
         val response = apiServiceService.getUsers(page, params.loadSize)
