@@ -75,6 +75,23 @@ tasks.dokkaJavadoc.configure {
 tasks.dokkaGfm.configure {
     outputDirectory.set(file("../documentation/gfm"))
 }
+// Dokka task for the library tests
+task dokkaHtmlTests(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    dokkaSourceSets {
+        named("main") {
+            outputDirectory.set(file("../documentation/test"))
+//            includes.from(files("dokka_modules_test.md"))
+            sourceRoots.setFrom(file("src/test/java"))
+            sourceRoots.from(file("src/androidTest/java"))
+
+            noAndroidSdkLink.set(false)
+            includeNonPublic.set(false)
+            skipEmptyPackages.set(true)
+            reportUndocumented.set(true)
+            skipDeprecated.set(false)
+        }
+    }
+}
 
 tasks.withType(dokkaHtml.getClass()).configureEach {
     pluginsMapConfiguration.set(
