@@ -13,14 +13,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 /**
- * A p i service
- *
- * @constructor Create empty A p i service
+ * <div class="en">Documentation in English</div>
+ * <div class="ja">Documentatie in Japan</div>
  */
 interface APIService {
     /**
      * User login
-     *
+     * <div class="en">Documentation in English</div>
+     * <div class="ja">Documentatie in Japan</div>
      * @param requestBody
      * @return
      */
@@ -32,7 +32,8 @@ interface APIService {
 
     /**
      * Get user info
-     *
+     *<div class="en">Documentation in English</div>
+     * <div class="ja">Documentatie in Japan</div>
      * @return
      */
     @GET("/api/users/2")
@@ -41,7 +42,8 @@ interface APIService {
 
     /**
      * Get users
-     *
+     * <div class="en">Documentation in English</div>
+     * <div class="ja">Documentatie in Japan</div>
      * @param page
      * @param limit
      * @return

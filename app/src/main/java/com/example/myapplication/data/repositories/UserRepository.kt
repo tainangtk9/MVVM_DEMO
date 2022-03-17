@@ -17,8 +17,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 /**
+ *<div class="en">Documentation in English</div>
+ * <div class="ja">Documentatie in Japan</div>
  * User repository
- *
  * @constructor Create empty User repository
  */
 class UserRepository {

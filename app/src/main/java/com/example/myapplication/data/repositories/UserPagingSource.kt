@@ -9,6 +9,8 @@ import retrofit2.HttpException
 import java.io.IOException
 
 /**
+ *<div class="en">Documentation in English</div>
+ * <div class="ja">Documentatie in Japan</div>
  * User paging source
  * @param apiServiceService Api service
  */
@@ -19,6 +21,8 @@ class UserPagingSource(private val apiServiceService: APIService) : PagingSource
     }
 
     /**
+     * <div class="en">Documentation in English</div>
+     * <div class="ja">Documentatie in Japan</div>
      * load data
      * @param params LoadParam
      * @return LoadResult list user
