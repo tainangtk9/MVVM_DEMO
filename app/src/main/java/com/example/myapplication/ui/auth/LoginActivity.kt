@@ -34,14 +34,14 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     }
 
     override fun onSuccess(message: LiveData<LoginResponse?>) {
-        message.observe(this, { loginResponse ->
+        message.observe(this) { loginResponse ->
             if (!loginResponse?.token.isNullOrBlank()) {
                 binding?.authViewModel?.getUserInfo()
             } else {
                 binding?.authViewModel?.isShowProgressBar?.set(false)
                 toast("Login Fail")
             }
-        })
+        }
     }
 
 

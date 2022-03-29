@@ -16,27 +16,30 @@ class AuthViewModel : ViewModel() {
     var authListener: AuthListener? = null
     var isShowProgressBar = ObservableBoolean(false)
     var userLiveData = MutableLiveData<User?>()
+    var TAG = AuthViewModel::class.java.canonicalName
 
-
-    fun validateData(email:String, password:String ) {
+    fun validateData(email:String?, password:String? ) {
         //Conditional branch1
-        if (email.isNotEmpty() && password.isNotEmpty()) {
+        if (email?.isNotEmpty() == true && password?.isNotEmpty() == true) {
             this.email = email
             this.password = password
         } else {
-            Log.e(AuthViewModel::class.java.canonicalName, "Data is invalid" )
+            Log.e(TAG, "Data is invalid" )
+            return
         }
 
         //Conditional branch2
-        if (email.contains("@") || password.length>8) {
+        if (email.contains("@") || password.length >8) {
             login(email,password)
         } else {
-            Log.e(AuthViewModel::class.java.canonicalName, "Data is invalid" )
+            Log.e(TAG, "Data is invalid" )
+            return
         }
     }
 
     fun login(email: String,password: String){
-
+        val loginResponse = UserRepository().userLogin(email, password)
+        authListener?.onSuccess(loginResponse)
     }
 
     fun onLoginButtonClick(view: View) {
@@ -45,8 +48,7 @@ class AuthViewModel : ViewModel() {
             return
         }
         authListener?.onStarted()
-        val loginResponse = UserRepository().userLogin(email!!, password!!)
-        authListener?.onSuccess(loginResponse)
+        validateData(email, password)
     }
 
     fun getUserInfo() {
