@@ -35,7 +35,7 @@ class AuthViewModelTest : TestCase() {
     public override fun tearDown() {}
 
     @Mock
-    lateinit var view:View
+    lateinit var view: View
 
     /**
      * Test get email
@@ -110,7 +110,15 @@ class AuthViewModelTest : TestCase() {
      *
      */
     @Test
-    fun testOnLoginButtonClick() {
+    fun `should failed when data is invalid`() {
+        authViewModel?.onLoginButtonClick(view)
+    }
+
+    @Test
+    fun `should success when data is Valid`() {
+        val testValue = "123456"
+        authViewModel?.email = testValue
+        authViewModel?.password = testValue
         authViewModel?.onLoginButtonClick(view)
     }
 
@@ -126,8 +134,8 @@ class AuthViewModelTest : TestCase() {
      */
     @Test
     fun `Input data is invalid when email or password is empty`() {
-        val testValue ="123456"
-        authViewModel?.validateData("",testValue)
+        val testValue = "123456"
+        authViewModel?.validateData("", testValue)
         assertNull(authViewModel?.email)
         assertNull(authViewModel?.password)
     }
@@ -138,10 +146,10 @@ class AuthViewModelTest : TestCase() {
      */
     @Test
     fun `Input data is valid when email and password is validate `() {
-        val testValue ="nangpt"
-         authViewModel?.validateData(testValue,testValue)
-        assertEquals(authViewModel?.email,testValue)
-        assertEquals(authViewModel?.password,testValue)
+        val testValue = "nangpt"
+        authViewModel?.validateData(testValue, testValue)
+        assertEquals(authViewModel?.email, testValue)
+        assertEquals(authViewModel?.password, testValue)
     }
 
     /**
@@ -150,11 +158,11 @@ class AuthViewModelTest : TestCase() {
      */
     @Test
     fun `Input data is invalid when email invalid and password is valid `() {
-        val fakeEmail ="nangpt"
-        val fakePassword ="12345678"
-        authViewModel?.validateData(fakeEmail,fakePassword)
-        assertEquals(authViewModel?.email,fakeEmail)
-        assertEquals(authViewModel?.password,fakePassword)
+        val fakeEmail = "nangpt"
+        val fakePassword = "12345678"
+        authViewModel?.validateData(fakeEmail, fakePassword)
+        assertEquals(authViewModel?.email, fakeEmail)
+        assertEquals(authViewModel?.password, fakePassword)
     }
 
     /**
@@ -163,11 +171,11 @@ class AuthViewModelTest : TestCase() {
      */
     @Test
     fun `Input data is invalid when email valid and password is invalid `() {
-        val fakeEmail ="nangpt@runsystem.net"
-        val fakePassword ="1234"
-        authViewModel?.validateData(fakeEmail,fakePassword)
-        assertEquals(authViewModel?.email,fakeEmail)
-        assertEquals(authViewModel?.password,fakePassword)
+        val fakeEmail = "nangpt@runsystem.net"
+        val fakePassword = "1234"
+        authViewModel?.validateData(fakeEmail, fakePassword)
+        assertEquals(authViewModel?.email, fakeEmail)
+        assertEquals(authViewModel?.password, fakePassword)
     }
 
     /**
@@ -175,7 +183,7 @@ class AuthViewModelTest : TestCase() {
      *
      */
     @Test
-    fun testLogin(){
+    fun testLogin() {
 
     }
 }

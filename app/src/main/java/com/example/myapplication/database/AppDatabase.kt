@@ -14,8 +14,18 @@ import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Singleton
 
 
+/**
+ * App database
+ *
+ * @constructor Create empty App database
+ */
 @Database(entities = [User::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
+    /**
+     * User dao
+     *
+     * @return
+     */
     abstract fun userDao(): UserDao
 
     companion object {
