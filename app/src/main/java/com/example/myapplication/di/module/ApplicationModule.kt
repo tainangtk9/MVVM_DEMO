@@ -1,12 +1,15 @@
 package com.example.myapplication.di.module
 
+import android.content.Context
 import com.example.myapplication.BuildConfig
+import com.example.myapplication.database.SharedPreference
 import com.example.myapplication.network.APIHelper
 import com.example.myapplication.network.APIHelperImpl
 import com.example.myapplication.network.APIService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,34 +26,32 @@ import javax.inject.Singleton
 class ApplicationModule {
 
     @Provides
-    fun providerBaseURL() = BuildConfig.BASE_URL
+    @AdminPreference
+    fun providesAdminPreferName(): String = "admin_Prefer"
 
     @Provides
+    @ClientPreference
+    fun providesClientPreferName(): String = "client_Prefer"
+
+    @Provides
+    @ClientPreference
     @Singleton
-    fun providerRetrofitClient(): OkHttpClient {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        return OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+    fun providesClientSharePref(
+        @ApplicationContext context: Context,
+        @ClientPreference prefer: String
+    ): SharedPreference {
+        return SharedPreference(context, prefer)
     }
 
     @Provides
+    @AdminPreference
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, baseURL: String): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(baseURL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+    fun providesAdminSharePref(
+        @ApplicationContext context: Context,
+        @AdminPreference prefer: String
+    ): SharedPreference {
+        return SharedPreference(context, prefer)
     }
 
-    @Provides
-    @Singleton
-    fun providerAPIService(retrofit: Retrofit): APIService {
-        return retrofit.create(APIService::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun providerAPIHelper(apiHelper: APIHelperImpl):APIHelper = apiHelper
 
 }
